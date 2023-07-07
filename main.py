@@ -32,9 +32,20 @@ def lbp(image):
             pat[i,j] = val
 
     return pat
+    
 
+def lbpHistogram(image):
+    # Compute the histogram
+    histogram, bins = np.histogram(image.flatten(), bins=256, range=[0, 256])
 
-
+    # Plot the histogram
+    plt.figure()
+    plt.plot(histogram, color='black')
+    plt.xlim([0, 256])
+    plt.xlabel('LBP Value')
+    plt.ylabel('Frequency')
+    plt.title('LBP Histogram')
+    plt.show()
 
 if __name__ == '__main__':
     image = cv2.imread("wrinkle_test2.jpg")
@@ -43,5 +54,5 @@ if __name__ == '__main__':
     cv2.imshow("Input", image)
     image = lbp(image)
     cv2.imshow("LBP Output",image)
-
+    lbpHistogram(image)
     cv2.waitKey(0)
